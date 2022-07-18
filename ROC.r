@@ -6,7 +6,7 @@ library(randomForest) # install with install.packages("randomForest")
 ## Generate weight and obesity datasets.
 ##
 #######################################
-set.seed(420) # this will make my results match yours
+set.seed(420) 
 
 num.samples <- 100
 
@@ -15,8 +15,6 @@ num.samples <- 100
 weight <- sort(rnorm(n=num.samples, mean=172, sd=29))
 
 ## Now we will decide if a sample is obese or not. 
-## NOTE: This method for classifying a sample as obese or not
-## was made up just for this example.
 ## rank(weight) returns 1 for the lightest, 2 for the second lightest, ...
 ##              ... and it returns 100 for the heaviest.
 ## So what we do is generate a random number between 0 and 1. Then we see if
@@ -27,7 +25,7 @@ weight <- sort(rnorm(n=num.samples, mean=172, sd=29))
 ## number is < 2/100. We repeat that process for all 100 samples
 obese <- ifelse(test=(runif(n=num.samples) < (rank(weight)/num.samples)), 
   yes=1, no=0)
-obese ## print out the contents of "obese" to show us which samples were
+obese ## print out the contents of "obese" to show which samples were
       ## classified "obese" with 1, and which samples were classified
       ## "not obese" with 0.
 
@@ -40,9 +38,7 @@ lines(weight, glm.fit$fitted.values)
 
 
 #######################################
-##
 ## draw ROC and AUC using pROC
-##
 #######################################
 
 ## NOTE: By default, the graphs come out looking terrible
@@ -102,9 +98,7 @@ roc(obese, glm.fit$fitted.values, plot=TRUE, legacy.axes=TRUE, percent=TRUE, xla
 
 
 #######################################
-##
 ## Now let's fit the data with a random forest...
-##
 #######################################
 rf.model <- randomForest(factor(obese) ~ weight)
 
@@ -113,9 +107,7 @@ roc(obese, rf.model$votes[,1], plot=TRUE, legacy.axes=TRUE, percent=TRUE, xlab="
 
 
 #######################################
-##
 ## Now layer logistic regression and random forest ROC graphs..
-##
 #######################################
 roc(obese, glm.fit$fitted.values, plot=TRUE, legacy.axes=TRUE, percent=TRUE, xlab="False Positive Percentage", ylab="True Postive Percentage", col="#377eb8", lwd=4, print.auc=TRUE)
 
