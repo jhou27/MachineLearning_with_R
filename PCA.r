@@ -1,18 +1,16 @@
-## In this example, the data is in a matrix called
-## data.matrix
-## columns are individual samples (i.e. cells)
-## rows are measurements taken for all the samples (i.e. genes)
+## columns are individual samples (i.e. subjects)
+## rows are measurements taken for all the samples (i.e. tests)
 ## Just for the sake of the example, here's some made up data...
 data.matrix <- matrix(nrow=100, ncol=10)
 colnames(data.matrix) <- c(
-  paste("wt", 1:5, sep=""),
-  paste("ko", 1:5, sep=""))
-rownames(data.matrix) <- paste("gene", 1:100, sep="")
+  paste("control", 1:5, sep=""),
+  paste("patient", 1:5, sep=""))
+rownames(data.matrix) <- paste("test", 1:100, sep="")
 for (i in 1:100) {
   wt.values <- rpois(5, lambda=sample(x=10:1000, size=1))
   ko.values <- rpois(5, lambda=sample(x=10:1000, size=1))
  
-  data.matrix[i,] <- c(wt.values, ko.values)
+  data.matrix[i,] <- c(control.values, patient.values)
 }
 head(data.matrix)
 dim(data.matrix)
@@ -43,21 +41,20 @@ ggplot(data=pca.data, aes(x=X, y=Y, label=Sample)) +
   theme_bw() +
   ggtitle("My PCA Graph")
  
-## get the name of the top 10 measurements (genes) that contribute
+## get the name of the top 10 measurements that contribute
 ## most to pc1.
 loading_scores <- pca$rotation[,1]
-gene_scores <- abs(loading_scores) ## get the magnitudes
-gene_score_ranked <- sort(gene_scores, decreasing=TRUE)
-top_10_genes <- names(gene_score_ranked[1:10])
+test_scores <- abs(loading_scores) ## get the magnitudes
+test_score_ranked <- sort(test_scores, decreasing=TRUE)
+top_10_tests <- names(test_score_ranked[1:10])
  
-top_10_genes ## show the names of the top 10 genes
+top_10_tests ## show the names of the top 10 genes
  
-pca$rotation[top_10_genes,1] ## show the scores (and +/- sign)
+pca$rotation[top_10_tests,1] ## show the scores (and +/- sign)
  
 #######
 ##
-## NOTE: Everything that follow is just bonus stuff.
-## It simply demonstrates how to get the same
+## The following demonstrates how to get the same
 ## results using "svd()" (Singular Value Decomposition) or using "eigen()"
 ## (Eigen Decomposition).
 ##
