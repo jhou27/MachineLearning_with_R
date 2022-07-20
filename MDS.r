@@ -18,34 +18,10 @@ for (i in 1:100) {
 head(data.matrix)
 dim(data.matrix)
  
+
 ###################################################################
 ##
-## 1) Just for reference, draw a PCA plot using this data...
-##
-###################################################################
-pca <- prcomp(t(data.matrix), scale=TRUE, center=TRUE) 
- 
-## calculate the percentage of variation that each PC accounts for...
-pca.var <- pca$sdev^2
-pca.var.per <- round(pca.var/sum(pca.var)*100, 1)
-pca.var.per
- 
-## now make a fancy looking plot that shows the PCs and the variation:
-pca.data <- data.frame(Sample=rownames(pca$x),
-  X=pca$x[,1],
-  Y=pca$x[,2])
-pca.data
- 
-ggplot(data=pca.data, aes(x=X, y=Y, label=Sample)) +
-  geom_text() +
-  xlab(paste("PC1 - ", pca.var.per[1], "%", sep="")) +
-  ylab(paste("PC2 - ", pca.var.per[2], "%", sep="")) +
-  theme_bw() +
-  ggtitle("PCA Graph")
- 
-###################################################################
-##
-## 2) Now draw an MDS plot using the same data and the Euclidean
+##    draw an MDS plot using the same data and the Euclidean
 ##    distance. This graph should look the same as the PCA plot
 ##
 ###################################################################
@@ -78,7 +54,7 @@ ggplot(data=mds.data, aes(x=X, y=Y, label=Sample)) +
  
 ###################################################################
 ##
-## 3) Now draw an MDS plot using the same data and the average log(fold change)
+##    Now draw an MDS plot using the same data and the average log(fold change)
 ##    This graph should look different than the first two
 ##
 ###################################################################
