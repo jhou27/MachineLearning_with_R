@@ -1,9 +1,5 @@
 library(ggplot2)
-## In this example, the data is in a matrix called
-## data.matrix
-## columns are individual samples (i.e. cells)
-## rows are measurements taken for all the samples (i.e. genes)
-## Just for the sake of the example, here's some made up data...
+#some made up data...
 data.matrix <- matrix(nrow=100, ncol=10)
 colnames(data.matrix) <- c(
   paste("wt", 1:5, sep=""),
