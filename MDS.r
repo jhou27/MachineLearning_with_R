@@ -1,5 +1,5 @@
 library(ggplot2)
-#some made up data...
+#some made up data called data.matrix
 data.matrix <- matrix(nrow=100, ncol=10)
 colnames(data.matrix) <- c(
   paste("wt", 1:5, sep=""),
