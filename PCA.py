@@ -1,20 +1,18 @@
-## NOTE: This is Python 3 code.
 import pandas as pd
 import numpy as np
 import random as rd
 from sklearn.decomposition import PCA
 from sklearn import preprocessing
-import matplotlib.pyplot as plt # NOTE: This was tested with matplotlib v. 2.1.0
+import matplotlib.pyplot as plt 
  
 #########################
 #
 # Data Generation Code
 #
 #########################
-## In this example, the data is in a data frame called data.
 ## Columns are individual samples (i.e. cells)
 ## Rows are measurements taken for all the samples (i.e. genes)
-## Just for the sake of the example, we'll use made up data...
+
 genes = ['gene' + str(i) for i in range(1,101)]
  
 wt = ['wt' + str(i) for i in range(1,6)]
